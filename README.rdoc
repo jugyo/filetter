@@ -22,7 +22,6 @@ In the future,
 - blog plugin
 - tumblr plugin
 - mail plugin
-- browser_reload plugin
 
 == SYNOPSIS:
 
