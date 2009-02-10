@@ -12,6 +12,9 @@ Filetter is a ...
 only few plugins.
 （プラグインがまだ全然ない！）
 
+no test!
+（テスト全然書いてない！）
+
 In the future,
 （将来的にはこんなプラグインが実装される予定！）
 
