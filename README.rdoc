@@ -12,6 +12,18 @@ Filetter is a ...
 only few plugins.
 （プラグインがまだ全然ない！）
 
+In the future,
+（将来的にはこんなプラグインが実装される予定！）
+
+  rspec plugin,
+  flickr plugin,
+  backup plugin,
+  twitter plugin,
+  blog plugin,
+  tumblr plugin,
+  mail plugin,
+  browser_reload plugin,
+
 == SYNOPSIS:
 
 Run:
