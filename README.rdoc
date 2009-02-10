@@ -1,0 +1,33 @@
+= filetter
+
+http://github.com/jugyo/filetter
+
+== DESCRIPTION:
+
+Filetter is a ...
+（フィアルを監視してほげほげするやつ！）
+
+== FEATURES/PROBLEMS:
+
+only few plugins.
+（プラグインがまだ全然ない！）
+
+== SYNOPSIS:
+
+Run:
+
+  filetter
+
+  or (for development)
+
+  ./run_filetter.rb
+
+== REQUIREMENTS:
+
+（特に無し！）
+
+== INSTALL:
+
+gem package is coming soon.
+（gem パッケージをそのうち用意するよ！）
+
