@@ -17,13 +17,11 @@ Thread.abort_on_exception = true
 module Filetter
   class << self
     def run(options = {})
-      @options = {
-                  :conf_dir => '~/.filetter/',
-                  :conf_file_name => 'conf',
-                  :pattern => './**/*',
-                  :interval => 1,
-                  :debug => false
-                  }.merge(options)
+      @options = { :conf_dir => '~/.filetter/',
+                   :conf_file_name => 'conf',
+                   :pattern => './**/*',
+                   :interval => 1,
+                   :debug => false }.merge(options)
 
       @conf_dir = File.expand_path(@options[:conf_dir])
       @conf_file = @conf_dir + @options[:conf_file_name]
