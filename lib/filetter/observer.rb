@@ -42,6 +42,9 @@ module Filetter
       end
 
       @input_thread = Thread.new do
+        Readline.completion_proc = lambda {|input|
+          self.methods.map{|i|i.to_s}.grep(/^#{Regexp.quote(input)}/)
+        }
         while @work && line = Readline.readline('> ', true)
           begin
             eval(line) unless line.empty?
@@ -55,7 +58,8 @@ module Filetter
       @input_thread.join
     end
 
-    def exit
+    def shutdown
+      puts '...'
       @work = false
     end
 
