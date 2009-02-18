@@ -28,13 +28,21 @@ In the future,
 
 == SYNOPSIS:
 
+Setup:
+
+To set up filetter, put your .filetter file in the current directory.
+
+.filetter example:
+
+require 'sample'
+
 Run:
 
-  filetter
+ filetter
 
 or (for development)
 
-  ./run_filetter.rb
+ ./run_filetter.rb
 
 == REQUIREMENTS:
 
