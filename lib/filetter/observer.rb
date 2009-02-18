@@ -63,9 +63,14 @@ module Filetter
     end
 
     def add_hook(*args, &block)
-      args.each do |arg|
-        @hooks[arg] ||= []
-        @hooks[arg] << block
+      unless args.empty?
+        args.each do |arg|
+          @hooks[arg] ||= []
+          @hooks[arg] << block
+        end
+      else
+        @hooks[:any] ||= []
+        @hooks[:any] << block
       end
     end
 
@@ -107,9 +112,11 @@ module Filetter
     end
 
     def call_hooks(name, pathnames = [])
-      return if !@hooks.has_key?(name) || pathnames.empty?
-      @hooks[name].each do |i|
-        i.call(pathnames.map{|i|i.to_s})
+      if @hooks.has_key?(name) && !pathnames.empty?
+        @hooks[name].each{|i| i.call(pathnames.map{|i| i.to_s}) }
+      end
+      if @hooks.has_key?(:any)
+        @hooks[:any].each{|i| i.call(pathnames.map{|i| i.to_s }, name) }
       end
     end
 
