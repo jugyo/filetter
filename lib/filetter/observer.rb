@@ -113,10 +113,22 @@ module Filetter
 
     def call_hooks(name, pathnames = [])
       if @hooks.has_key?(name) && !pathnames.empty?
-        @hooks[name].each{|i| i.call(pathnames.map{|i| i.to_s}) }
+        @hooks[name].each do |i|
+          begin
+            i.call(pathnames.map{|i| i.to_s})
+          rescue => e
+            handle_error(e)
+          end
+        end
       end
       if @hooks.has_key?(:any)
-        @hooks[:any].each{|i| i.call(pathnames.map{|i| i.to_s }, name) }
+        @hooks[:any].each do |i|
+          begin
+            i.call(pathnames.map{|i| i.to_s }, name)
+          rescue => e
+            handle_error(e)
+          end
+        end
       end
     end
 
@@ -125,8 +137,6 @@ module Filetter
         puts "Error: #{e}"
         puts e.backtrace.join("\n")
       end
-      call_hooks(:error)
     end
   end
 end
-
