@@ -21,5 +21,9 @@ module Filetter
       default_option = {:pattern => './**/*', :interval => 1, :debug => false}
       Observer.run(default_option.merge(options))
     end
+
+    def add_hook(*args, &block)
+      Observer.instance.add_hook(*args, &block)
+    end
   end
 end

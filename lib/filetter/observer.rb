@@ -3,6 +3,7 @@ module Filetter
   class Observer
     include Singleton
 
+    # deplecated
     def self.add_hook(*args, &block)
       instance.add_hook(*args, &block)
     end
@@ -20,21 +21,20 @@ module Filetter
       @pattern = './**/*'
       @interval = 1
       @work = true
-      @initialized = false
       @file_infos = {}
       @hooks = {}
     end
 
     def run
+      collect_files
+
       @observe_thread = Thread.new do
         while @work
           begin
-            check_exists()
-            check_modifies()
+            check_files
           rescue => e
             handle_error(e)
           ensure
-            @initialized = true
             sleep @interval
           end
         end
@@ -71,7 +71,7 @@ module Filetter
 
     private
 
-    def check_exists()
+    def collect_files
       real_files = Pathname.glob(@pattern).map{|i|i.realpath}
       current_files = @file_infos.keys
       created_files = real_files - current_files
@@ -86,10 +86,18 @@ module Filetter
         @file_infos[pathname] = FileInfo.new(pathname)
       end
 
-      if @initialized
-        call_hooks(:created, created_files) unless created_files.empty?
-        call_hooks(:deleted, deleted_files) unless deleted_files.empty?
-      end
+      [created_files, deleted_files]
+    end
+
+    def check_files
+      check_exists
+      check_modifies
+    end
+
+    def check_exists
+      created_files, deleted_files = collect_files
+      call_hooks(:created, created_files) unless created_files.empty?
+      call_hooks(:deleted, deleted_files) unless deleted_files.empty?
     end
 
     def check_modifies
@@ -99,7 +107,7 @@ module Filetter
     end
 
     def call_hooks(name, pathnames = [])
-      return unless @hooks.has_key? name
+      return if !@hooks.has_key?(name) || pathnames.empty?
       @hooks[name].each do |i|
         i.call(pathnames.map{|i|i.to_s})
       end
