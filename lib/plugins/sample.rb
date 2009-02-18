@@ -1,3 +1,4 @@
+# -*- coding: utf-8 -*-
 module Filetter
   Observer.add_hook :modified do |files|
     print 'modified: '

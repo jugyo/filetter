@@ -1,5 +1,4 @@
 # -*- coding: utf-8 -*-
-
 module Filetter
   class Observer
     include Singleton

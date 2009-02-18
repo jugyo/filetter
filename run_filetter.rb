@@ -11,7 +11,9 @@ self_file =
   end
 $:.unshift(File.dirname(self_file) + "/lib")
 
+conf_file = '.filetter'
+
 require 'filetter'
-Filetter.run(:debug => true)
+Filetter.run(conf_file, :debug => true)
 
 # Startup scripts for development
