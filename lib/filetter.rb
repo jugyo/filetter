@@ -15,11 +15,11 @@ require 'filetter/observer'
 Thread.abort_on_exception = true
 
 module Filetter
-  VERSION = '0.1.0'
   class << self
-    def run(conf_file = '.filetter', options = {})
-      load conf_file
-      default_option = {:pattern => './**/*', :interval => 1, :debug => false}
+    def run(options = {})
+      default_option = {:conf_file => '.filetter',:pattern => './**/*', :interval => 1, :debug => false}
+      options = default_option.merge(options)
+      load options[:conf_file]
       Observer.run(default_option.merge(options))
     end
 
