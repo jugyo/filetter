@@ -41,7 +41,7 @@ Run:
 
 or (for development)
 
- ./run_filetter.rb
+ ./bin/debug
 
 == REQUIREMENTS:
 
