@@ -15,6 +15,7 @@ require 'filetter/observer'
 Thread.abort_on_exception = true
 
 module Filetter
+  VERSION = '0.1.0'
   class << self
     def run(conf_file = '.filetter', options = {})
       load conf_file

@@ -4,8 +4,7 @@ http://github.com/jugyo/filetter
 
 == DESCRIPTION:
 
-Filetter is a ...
-（フィアルを監視してほげほげするやつ！）
+Filetter is a pluggable tool for file system.
 
 == FEATURES/PROBLEMS:
 
