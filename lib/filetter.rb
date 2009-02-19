@@ -20,21 +20,33 @@ module Filetter
       pattern = './**/*'
       interval = 1
       debug = false
+      config_file = '.filetter'
+      mode = nil
+      load_file = nil
 
       OptionParser.new do |opt|
         opt.version = VERSION
         opt.program_name = self.to_s
-        opt.on('-m', '--mode=mode', 'Run mode') {|v| require v } # use mode
-        opt.on('-f', '--file=file', 'File to load') {|v| load v } # load user file
-        opt.on('-p', '--pattern=pattern', 'Pattern of target files ') {|v| pattern = v }
-        opt.on('-i', '--interval=interval', 'Interval of check files') {|v| interval = v }
-        opt.on('-d', '--debug', 'Enable debug mode') {|v| debug = true}
-        begin
-          opt.parse!(ARGV)
-        rescue LoadError => e
-          puts e
-          exit!
+        opt.on('-c', '--config=file', 'Configuration file'            ) {|v| config_file = v  }
+        opt.on('-m', '--mode=mode', 'Run mode'                        ) {|v| mode = v         }
+        opt.on('-f', '--file=file', 'File to load'                    ) {|v| load_file = v    }
+        opt.on('-p', '--pattern=pattern', 'Pattern of target files'   ) {|v| pattern = v      }
+        opt.on('-i', '--interval=interval', 'Interval of check files' ) {|v| interval = v     }
+        opt.on('-d', '--debug', 'Enable debug mode'                   ) {|v| debug = true     }
+        opt.parse!(ARGV)
+      end
+
+      begin
+        unless mode || load_file
+          require 'sample'
+        else
+          require mode if mode
+          load load_file if load_file && File.exist?(load_file)
         end
+        load config_file if config_file && File.exist?(config_file)
+      rescue LoadError => e
+        puts e
+        exit!
       end
 
       Observer.run(:pattern => pattern, :interval => interval, :debug => debug)
