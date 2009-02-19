@@ -1,4 +1,9 @@
 # -*- coding: utf-8 -*-
+
+require 'pathname'
+require 'readline'
+require 'singleton'
+
 module Filetter
   class Observer
     include Singleton

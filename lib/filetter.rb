@@ -4,9 +4,8 @@ $:.unshift(File.dirname(__FILE__)) unless
 
 $: << File.dirname(__FILE__) + '/plugins'
 
-require 'pathname'
-require 'readline'
-require 'singleton'
+require 'rubygems'
+require 'configatron'
 
 require 'filetter/version'
 require 'filetter/file_info'

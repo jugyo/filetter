@@ -25,7 +25,7 @@ Gem::Specification.new do |s|
                 History.txt
                 Rakefile )
   s.executables = ["filetter"]
-  #s.add_dependency("rubytter", ">= 0")
+  s.add_dependency("configatron", ">= 2.2.2")
   s.author = 'jugyo'
   s.email = 'jugyo.org@gmail.com'
   s.homepage = 'http://github.com/jugyo/filetter'
