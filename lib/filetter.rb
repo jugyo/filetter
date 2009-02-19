@@ -6,6 +6,7 @@ $: << File.dirname(__FILE__) + '/modes'
 
 require 'rubygems'
 require 'configatron'
+def config; configatron; end
 
 require 'filetter/version'
 require 'filetter/file_info'
