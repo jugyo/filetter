@@ -27,28 +27,34 @@ In the future,
 
 == SYNOPSIS:
 
-Setup:
-
-To set up filetter, put your .filetter file in the current directory.
-
-.filetter example:
-
-require 'sample'
-
 Run:
 
- filetter
+ filetter -m MODE
 
 or (for development)
 
- ./bin/debug
+ ./bin/debug -m MODE
+
+Example:
+
+run as 'mozrepl' mode for files named '*.css':
+
+ filetter -m mozrepl -p './**/*.css'
+
+Configuration:
+
+Default configuration file is '.filetter' in the current directory.
+Filetter will load it if exist.
+
+Or you specify it as follows:
+
+ filtter -m MODE -c my_config_file
 
 == REQUIREMENTS:
 
-（特に無し！）
+configatron
 
 == INSTALL:
 
-gem package is coming soon.
-（gem パッケージをそのうち用意するよ！）
-
+ gem source -a http://gems.github.com
+ sudo gem install jugyo-filetter
