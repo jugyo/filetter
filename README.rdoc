@@ -41,14 +41,11 @@ run as 'mozrepl' mode for files named '*.css':
 
  filetter -m mozrepl -p './**/*.css'
 
-Configuration:
+You load a file for configuration or original modes.
 
-Default configuration file is '.filetter' in the current directory.
-Filetter will load it if exist.
+ filetter -f your_file
 
-Or you specify it as follows:
-
- filtter -m MODE -c my_config_file
+Default file to load is '.filetter' in the current directory if exist.
 
 == REQUIREMENTS:
 

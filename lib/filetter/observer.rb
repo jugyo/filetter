@@ -49,7 +49,7 @@ module Filetter
         Readline.completion_proc = lambda {|input|
           self.methods.map{|i|i.to_s}.grep(/^#{Regexp.quote(input)}/)
         }
-        puts 'Enter "exit" to exit.'
+        puts '=> Enter "exit" to exit.'
         while @work && line = Readline.readline('> ', true)
           begin
             eval(line) unless line.empty?

@@ -25,9 +25,8 @@ module Filetter
       OptionParser.new do |opt|
         opt.version = VERSION
         opt.program_name = self.to_s
-        opt.on('-c', '--config=file', 'Configuration file'            ) {|v| config_file = v  }
         opt.on('-m', '--mode=mode', 'Run mode'                        ) {|v| mode = v         }
-        opt.on('-f', '--file=file', 'File to load'                    ) {|v| load_file = v    }
+        opt.on('-f', '--load=file', 'File to load'                    ) {|v| load_file = v    }
         opt.on('-p', '--pattern=pattern', 'Pattern of target files'   ) {|v| pattern = v      }
         opt.on('-i', '--interval=interval', 'Interval of check files' ) {|v| interval = v     }
         opt.on('-d', '--debug', 'Enable debug mode'                   ) {|v| debug = true     }
@@ -36,12 +35,18 @@ module Filetter
 
       begin
         unless mode || load_file
+          puts '=> Run as "sample" mode'
           require 'sample'
         else
-          require mode if mode
-          load load_file if load_file && File.exist?(load_file)
+          if mode
+            puts "=> Run as \"#{mode}\" mode"
+            require mode
+          end
+          if load_file
+            puts "=> load \"#{load_file}\""
+            load load_file
+          end
         end
-        load config_file if config_file && File.exist?(config_file)
       rescue LoadError => e
         puts e
         exit!
