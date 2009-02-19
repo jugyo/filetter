@@ -1,16 +1,16 @@
 Gem::Specification.new do |s|
   s.name = 'filetter'
-  s.version = '0.0.1'
+  s.version = '0.1.0'
   s.summary = "Filetter is a pluggable tool for file system."
   s.description = "Filetter is a pluggable tool for file system."
-  s.files = %w( lib/filetter/file_info.rb lib/filetter/observer.rb lib/filetter/version.rb lib/filetter.rb lib/plugins/mozrepl.rb lib/plugins/sample.rb
+  s.files = %w( lib/filetter/file_info.rb lib/filetter/observer.rb lib/filetter/version.rb lib/filetter.rb lib/modes/mozrepl.rb lib/modes/sample.rb
                 
                 
                 README.rdoc
                 History.txt
                 Rakefile )
   s.executables = ["filetter"]
-  #s.add_dependency("rubytter", ">= 0")
+  s.add_dependency("configatron", ">= 2.2.2")
   s.author = 'jugyo'
   s.email = 'jugyo.org@gmail.com'
   s.homepage = 'http://github.com/jugyo/filetter'
