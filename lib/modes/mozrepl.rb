@@ -1,6 +1,5 @@
 require 'net/telnet'
 Filetter.add_hook do |files, event|
-  puts event
   telnet = Net::Telnet.new({
       "Host" => "localhost",
       "Port" => 4242

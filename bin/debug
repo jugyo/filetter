@@ -12,6 +12,6 @@ self_file =
 $:.unshift(File.dirname(self_file) + "/../lib")
 
 require 'filetter'
-Filetter.run(:debug => true)
+Filetter.run
 
 # Startup scripts for development

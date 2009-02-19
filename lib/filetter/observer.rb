@@ -62,7 +62,7 @@ module Filetter
       @input_thread.join
     end
 
-    def shutdown
+    def exit
       puts '...'
       @work = false
     end

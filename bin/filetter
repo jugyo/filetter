@@ -4,4 +4,4 @@
 $KCODE="u" unless Object.const_defined? :Encoding
 
 require 'filetter'
-Filetter.run(:debug => true)
+Filetter.run
