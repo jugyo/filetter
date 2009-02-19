@@ -20,7 +20,6 @@ Gem::Specification.new do |s|
   s.description = "Filetter is a pluggable tool for file system."
   s.files = %w( #{Dir['lib/**/*.rb'].join(' ')}
                 #{Dir['spec/**/*.rb'].join(' ')}
-                #{Dir['examples/**/*.rb'].join(' ')}
                 README.rdoc
                 History.txt
                 Rakefile )
