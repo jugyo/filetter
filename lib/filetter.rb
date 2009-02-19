@@ -1,6 +1,7 @@
 # -*- coding: utf-8 -*-
 $:.unshift(File.dirname(__FILE__) + '/modes')
 
+require 'optparse'
 require 'rubygems'
 require 'configatron'
 def config; configatron; end
@@ -8,7 +9,6 @@ def config; configatron; end
 require 'filetter/version'
 require 'filetter/file_info'
 require 'filetter/observer'
-require 'optparse'
 
 Thread.abort_on_exception = true
 
