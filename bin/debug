@@ -9,11 +9,9 @@ self_file =
   else
     __FILE__
   end
-$:.unshift(File.dirname(self_file) + "/lib")
-
-conf_file = '.filetter'
+$:.unshift(File.dirname(self_file) + "/../lib")
 
 require 'filetter'
-Filetter.run(conf_file, :debug => true)
+Filetter.run(:debug => true)
 
 # Startup scripts for development
