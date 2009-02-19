@@ -22,11 +22,13 @@ module Filetter
       debug = false
 
       OptionParser.new do |opt|
-        opt.on('-m mode', 'run mode') {|v| require v } # use mode
-        opt.on('-f file', 'file to load') {|v| load v } # load user file
-        opt.on('-p pattern', 'target files pattern') {|v| pattern = v }
-        opt.on('-i interval', 'check files interval') {|v| interval = v }
-        opt.on('-d', 'enable debug mode') {|v| debug = true}
+        opt.version = VERSION
+        opt.program_name = self.to_s
+        opt.on('-m', '--mode=mode', 'Run mode') {|v| require v } # use mode
+        opt.on('-f', '--file=file', 'File to load') {|v| load v } # load user file
+        opt.on('-p', '--pattern=pattern', 'Pattern of target files ') {|v| pattern = v }
+        opt.on('-i', '--interval=interval', 'Interval of check files') {|v| interval = v }
+        opt.on('-d', '--debug', 'Enable debug mode') {|v| debug = true}
         begin
           opt.parse!(ARGV)
         rescue LoadError => e
