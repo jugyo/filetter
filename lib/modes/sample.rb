@@ -1,17 +1,17 @@
 # -*- coding: utf-8 -*-
 module Filetter
-  add_hook :modified do |files|
-    print 'modified: '
+  add_hook :modified do |files, event|
+    print "#{event}: "
     p files
   end
 
-  add_hook :created do |files|
-    print 'created: '
+  add_hook :created do |files, event|
+    print "#{event}: "
     p files
   end
 
-  add_hook :deleted do |files|
-    print 'deleted: '
+  add_hook :deleted do |files, event|
+    print "#{event}: "
     p files
   end
 end

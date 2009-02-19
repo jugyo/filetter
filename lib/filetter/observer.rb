@@ -120,7 +120,7 @@ module Filetter
       if @hooks.has_key?(name) && !pathnames.empty?
         @hooks[name].each do |i|
           begin
-            i.call(pathnames.map{|i| i.to_s})
+            i.call(pathnames.map{|i| i.to_s}, name)
           rescue => e
             handle_error(e)
           end
