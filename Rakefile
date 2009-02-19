@@ -24,6 +24,7 @@ Gem::Specification.new do |s|
                 README.rdoc
                 History.txt
                 Rakefile )
+  s.executables = ["filetter"]
   #s.add_dependency("rubytter", ">= 0")
   s.author = 'jugyo'
   s.email = 'jugyo.org@gmail.com'
