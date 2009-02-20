@@ -31,6 +31,8 @@ module Filetter
     end
 
     def run
+      puts "=> initializing. please wait..."
+
       collect_files
 
       @observe_thread = Thread.new do

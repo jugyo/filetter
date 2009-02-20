@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-$:.unshift(File.dirname(__FILE__) + '/modes')
+$:.unshift(File.expand_path(File.dirname(__FILE__) + '/modes'))
 
 require 'optparse'
 require 'rubygems'
@@ -18,25 +18,32 @@ module Filetter
       pattern = './**/*'
       interval = 1
       debug = false
-      config_file = '.filetter'
       mode = nil
       load_path = nil
-      load_file = nil
+      load_file = '.filetter'
+      work_dir = nil
 
       OptionParser.new do |opt|
         opt.version = VERSION
         opt.program_name = self.to_s
         opt.on('-m', '--mode=mode', 'Run mode'                        ) {|v| mode = v         }
         opt.on('-l', '--loadpath=path', 'Library load path'           ) {|v| load_path = v    }
-        opt.on('-f', '--load=file', 'File to load'                    ) {|v| load_file = v    }
+        opt.on('-f', '--loadfile=file', 'File to load'                ) {|v| load_file = v    }
+        opt.on('-c', '--cd=directory', 'cd to directory'              ) {|v| work_dir = v    }
         opt.on('-p', '--pattern=pattern', 'Pattern of target files'   ) {|v| pattern = v      }
         opt.on('-i', '--interval=interval', 'Interval of check files' ) {|v| interval = v     }
         opt.on('-d', '--debug', 'Enable debug mode'                   ) {|v| debug = true     }
         opt.parse!(ARGV)
       end
 
+      $:.unshift(File.expand_path(load_path)) if load_path
+
+      if work_dir
+        Dir.chdir(work_dir)
+        puts "=> cd to #{work_dir}"
+      end
+
       begin
-        $:.unshift(load_path) if load_path
         unless mode || load_file
           puts '=> Run as "sample" mode'
           require 'sample'
@@ -45,13 +52,18 @@ module Filetter
             puts "=> Run as \"#{mode}\" mode"
             require mode
           end
-          if load_file
+          if load_file && File.exist?(load_file)
             puts "=> load \"#{load_file}\""
             load load_file
           end
         end
       rescue LoadError => e
         puts e
+        raise if debug
+        exit!
+      rescue => e
+        puts e
+        raise if debug
         exit!
       end
 
