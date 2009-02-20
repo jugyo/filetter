@@ -20,12 +20,14 @@ module Filetter
       debug = false
       config_file = '.filetter'
       mode = nil
+      load_path = nil
       load_file = nil
 
       OptionParser.new do |opt|
         opt.version = VERSION
         opt.program_name = self.to_s
         opt.on('-m', '--mode=mode', 'Run mode'                        ) {|v| mode = v         }
+        opt.on('-l', '--loadpath=path', 'Library load path'           ) {|v| load_path = v    }
         opt.on('-f', '--load=file', 'File to load'                    ) {|v| load_file = v    }
         opt.on('-p', '--pattern=pattern', 'Pattern of target files'   ) {|v| pattern = v      }
         opt.on('-i', '--interval=interval', 'Interval of check files' ) {|v| interval = v     }
@@ -34,6 +36,7 @@ module Filetter
       end
 
       begin
+        $:.unshift(load_path) if load_path
         unless mode || load_file
           puts '=> Run as "sample" mode'
           require 'sample'
