@@ -8,24 +8,24 @@ Filetter is a pluggable tool for file system.
 
 == FEATURES/PROBLEMS:
 
-only few plugins.
-（プラグインがまだ全然ない！）
-
-no test!
-（テスト全然書いてない！）
+- mozrepl mode
+- twitter mode
+- flickr mode
 
 In the future,
-（将来的にはこんなプラグインが実装される予定！）
 
-- rspec plugin
-- flickr plugin
-- backup plugin
-- twitter plugin
-- blog plugin
-- tumblr plugin
-- mail plugin
+- rspec
+- backup
+- blog
+- tumblr
+- mail
+...
 
 == SYNOPSIS:
+
+Show help:
+
+ filetter --help
 
 Run:
 
@@ -50,6 +50,9 @@ Default file to load is '.filetter' in the current directory if exist.
 == REQUIREMENTS:
 
 configatron
+highline
+rubytter
+rflickr
 
 == INSTALL:
 
