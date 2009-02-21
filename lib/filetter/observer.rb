@@ -33,8 +33,8 @@ module Filetter
         self.__send__("#{k.to_s}=".to_sym, v) if self.respond_to?(k)
       end
 
-      puts "=> initializing. please wait..."
-      collect_files(true)
+      puts "=> initializing..."
+      collect_files
 
       @input_thread = Thread.new do
         Readline.completion_proc = lambda {|input|
@@ -50,11 +50,12 @@ module Filetter
         end
       end
 
-      sleep interval
+      sleep @interval
 
       @observe_thread = Thread.new do
         while @work
           begin
+            puts 'checking files...' if debug
             check_files
           rescue => e
             handle_error(e)
@@ -87,18 +88,17 @@ module Filetter
 
     private
 
-    def collect_files(init = false)
+    def collect_files
       real_files = Pathname.glob(@pattern).map do |i|
-        if init || debug
+        if debug
           print "\e[1K\e[0G#{i.basename.to_s}"
           $stdout.flush
         end
         i.realpath
       end
 
-      if init || debug
+      if debug
         print "\e[1K\e[0G"
-        print @prompt unless init
         $stdout.flush
       end
 
