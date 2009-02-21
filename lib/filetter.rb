@@ -14,7 +14,7 @@ Thread.abort_on_exception = true
 
 module Filetter
   class << self
-    def run
+    def run(options)
       pattern = './**/*'
       interval = 1
       debug = false
@@ -67,7 +67,7 @@ module Filetter
         exit!
       end
 
-      Observer.run(:pattern => pattern, :interval => interval, :debug => debug)
+      Observer.run({:pattern => pattern, :interval => interval, :debug => debug}.merge(options))
     end
 
     def add_hook(*args, &block)
