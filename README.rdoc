@@ -39,11 +39,11 @@ or (for development)
 
 Example:
 
-run as 'mozrepl' mode for files named '*.css':
+Run as 'mozrepl' mode for files named '*.css':
 
  filetter -m mozrepl -p './**/*.css'
 
-You load a file for configuration or original modes.
+To load your file:
 
  filetter -f your_file
 
