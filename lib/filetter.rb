@@ -16,7 +16,7 @@ module Filetter
   class << self
     def run(options)
       pattern = './**/*'
-      interval = 1
+      interval = 2
       debug = false
       mode = nil
       load_path = nil
@@ -48,13 +48,13 @@ module Filetter
           puts '=> Run as "sample" mode'
           require 'sample'
         else
-          if mode
-            puts "=> Run as \"#{mode}\" mode"
-            require mode
-          end
           if load_file && File.exist?(load_file)
             puts "=> load \"#{load_file}\""
             load load_file
+          end
+          if mode
+            puts "=> Run as \"#{mode}\" mode"
+            require mode
           end
         end
       rescue LoadError => e
