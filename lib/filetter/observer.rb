@@ -14,13 +14,10 @@ module Filetter
     end
 
     def self.run(options = {})
-      options.each do |k, v|
-        instance.__send__("#{k.to_s}=".to_sym, v) if instance.respond_to?(k)
-      end
-      instance.run
+      instance.run(options)
     end
 
-    attr_accessor :pattern, :interval, :debug
+    attr_accessor :pattern, :interval, :debug, :prompt
 
     def initialize
       @pattern = './**/*'
@@ -28,12 +25,32 @@ module Filetter
       @work = true
       @file_infos = {}
       @hooks = {}
+      @prompt = '> '
     end
 
-    def run
-      puts "=> initializing. please wait..."
+    def run(options = {})
+      options.each do |k, v|
+        self.__send__("#{k.to_s}=".to_sym, v) if self.respond_to?(k)
+      end
 
-      collect_files
+      puts "=> initializing. please wait..."
+      collect_files(true)
+
+      @input_thread = Thread.new do
+        Readline.completion_proc = lambda {|input|
+          self.methods.map{|i|i.to_s}.grep(/^#{Regexp.quote(input)}/)
+        }
+        puts '=> Enter "exit" to exit.'
+        while @work && line = Readline.readline(@prompt, true)
+          begin
+            eval(line) unless line.empty?
+          rescue => e
+            handle_error(e)
+          end
+        end
+      end
+
+      sleep interval
 
       @observe_thread = Thread.new do
         while @work
@@ -43,20 +60,6 @@ module Filetter
             handle_error(e)
           ensure
             sleep @interval
-          end
-        end
-      end
-
-      @input_thread = Thread.new do
-        Readline.completion_proc = lambda {|input|
-          self.methods.map{|i|i.to_s}.grep(/^#{Regexp.quote(input)}/)
-        }
-        puts '=> Enter "exit" to exit.'
-        while @work && line = Readline.readline('> ', true)
-          begin
-            eval(line) unless line.empty?
-          rescue => e
-            handle_error(e)
           end
         end
       end
@@ -84,8 +87,21 @@ module Filetter
 
     private
 
-    def collect_files
-      real_files = Pathname.glob(@pattern).map{|i|i.realpath}
+    def collect_files(init = false)
+      real_files = Pathname.glob(@pattern).map do |i|
+        if init || debug
+          print "\e[1K\e[0G#{i.basename.to_s}"
+          $stdout.flush
+        end
+        i.realpath
+      end
+
+      if init || debug
+        print "\e[1K\e[0G"
+        print @prompt unless init
+        $stdout.flush
+      end
+
       current_files = @file_infos.keys
       created_files = real_files - current_files
       deleted_files = current_files - real_files
