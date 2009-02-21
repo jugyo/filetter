@@ -14,7 +14,7 @@ Thread.abort_on_exception = true
 
 module Filetter
   class << self
-    def run(options)
+    def run(options = {})
       pattern = './**/*'
       interval = 2
       debug = false
