@@ -8,11 +8,13 @@ Filetter is a pluggable tool for file system.
 
 == FEATURES/PROBLEMS:
 
+Available modes:
+
 - mozrepl mode
 - twitter mode
 - flickr mode
 
-In the future,
+In the future:
 
 - rspec
 - backup
