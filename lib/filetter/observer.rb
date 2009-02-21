@@ -77,8 +77,9 @@ module Filetter
     def add_hook(*args, &block)
       unless args.empty?
         args.each do |arg|
-          @hooks[arg] ||= []
-          @hooks[arg] << block
+          hook_name = normalize_as_hook_name(arg)
+          @hooks[hook_name] ||= []
+          @hooks[hook_name] << block
         end
       else
         @hooks[:any] ||= []
@@ -160,6 +161,17 @@ module Filetter
       if debug
         puts "Error: #{e}"
         puts e.backtrace.join("\n")
+      end
+    end
+
+    def normalize_as_hook_name(name)
+      case name.to_s
+      when /^created?$/
+        :created
+      when /^(modif(y|ied)|updated?)$/
+        :modified
+      when /(deleted?|removed?)/
+        :deleted
       end
     end
   end
