@@ -51,10 +51,10 @@ Default file to load is '.filetter' in the current directory if exist.
 
 == REQUIREMENTS:
 
-configatron
-highline
-rubytter
-rflickr
+- configatron
+- highline
+- rubytter
+- rflickr
 
 == INSTALL:
 
