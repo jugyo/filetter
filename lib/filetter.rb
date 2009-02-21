@@ -26,13 +26,13 @@ module Filetter
       OptionParser.new do |opt|
         opt.version = VERSION
         opt.program_name = self.to_s
-        opt.on('-m', '--mode=mode', 'Run mode'                        ) {|v| mode = v         }
-        opt.on('-l', '--loadpath=path', 'Library load path'           ) {|v| load_path = v    }
-        opt.on('-f', '--loadfile=file', 'File to load'                ) {|v| load_file = v    }
-        opt.on('-c', '--cd=directory', 'cd to directory'              ) {|v| work_dir = v    }
-        opt.on('-p', '--pattern=pattern', 'Pattern of target files'   ) {|v| pattern = v      }
-        opt.on('-i', '--interval=interval', 'Interval of check files' ) {|v| interval = v     }
-        opt.on('-d', '--debug', 'Enable debug mode'                   ) {|v| debug = true     }
+        opt.on('-m', '--mode=mode', 'Run mode'                                  ) {|v| mode = v       }
+        opt.on('-l', '--loadpath=path', 'Library load path'                     ) {|v| load_path = v  }
+        opt.on('-f', '--loadfile=file', 'File to load'                          ) {|v| load_file = v  }
+        opt.on('-c', '--cd=directory', 'cd to directory'                        ) {|v| work_dir = v   }
+        opt.on('-p', '--pattern=pattern', 'Pattern of target files'             ) {|v| pattern = v    }
+        opt.on('-i', '--interval=interval', 'Interval of check files', Integer  ) {|v| interval = v   }
+        opt.on('-d', '--debug', 'Enable debug mode'                             ) {|v| debug = true   }
         opt.parse!(ARGV)
       end
 
