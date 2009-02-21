@@ -13,7 +13,7 @@ module Filetter
     files.each do |file|
       file_name = File.basename(file)
       rubytter.update(file_name)
-      puts "=> post to twitter '#{file_name}'"
+      puts "=> Post to twitter '#{file_name}'"
     end
   end
 end
