@@ -1,5 +1,4 @@
 # -*- coding: utf-8 -*-
-$:.unshift(File.expand_path(File.dirname(__FILE__) + '/modes'))
 
 require 'optparse'
 require 'rubygems'
@@ -46,7 +45,7 @@ module Filetter
       begin
         unless mode || load_file
           puts '=> Run as "sample" mode'
-          require 'sample'
+          require 'modes/sample'
         else
           if load_file && File.exist?(load_file)
             puts "=> load \"#{load_file}\""
@@ -54,7 +53,7 @@ module Filetter
           end
           if mode
             puts "=> Run as \"#{mode}\" mode"
-            require mode
+            require "modes/#{mode}"
           end
         end
       rescue LoadError => e
