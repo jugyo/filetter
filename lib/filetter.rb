@@ -21,6 +21,7 @@ module Filetter
       load_file = '.filetter'
       work_dir = nil
       help = nil
+      list = false
 
       OptionParser.new do |opt|
         opt.version = VERSION
@@ -31,6 +32,7 @@ module Filetter
         opt.on('-p', '--pattern=pattern', 'Pattern of target files'             ) {|v| pattern = v    }
         opt.on('-i', '--interval=interval', 'Interval of check files', Integer  ) {|v| interval = v   }
         opt.on('-d', '--debug', 'Enable debug mode'                             ) {|v| debug = true   }
+        opt.on('-l', '--list', 'List up available modes'                        ) {|v| list = true    }
         opt.parse!(ARGV)
         help = opt.help
       end
@@ -42,8 +44,13 @@ module Filetter
 
       begin
         if mode.nil? && !File.exist?(load_file)
-          puts help
-          exit!
+          if list
+            puts Dir[File.dirname(__FILE__) + '/modes/*.rb'].map{|f|File.basename(f).gsub(/\.rb$/, '')}
+            exit
+          else
+            puts help
+            exit!
+          end
         else
           puts "=> load \"#{load_file}\""
           load load_file
