@@ -1,6 +1,6 @@
 Gem::Specification.new do |s|
   s.name = 'filetter'
-  s.version = '0.2.5'
+  s.version = '0.2.6'
   s.summary = "Filetter is a pluggable tool for file system."
   s.description = "Filetter is a pluggable tool for file system."
   s.files = %w( lib/filetter/file_info.rb lib/filetter/observer.rb lib/filetter/version.rb lib/filetter.rb lib/modes/flickr.rb lib/modes/mozrepl.rb lib/modes/sample.rb lib/modes/twitter.rb
