@@ -1,5 +1,4 @@
 # -*- coding: utf-8 -*-
-
 require 'rubytter'
 
 if config.twitter.login.empty? || config.twitter.password.empty?
@@ -8,7 +7,10 @@ if config.twitter.login.empty? || config.twitter.password.empty?
 end
 
 module Filetter
-  rubytter = Rubytter.new(config.twitter.login, config.twitter.password)
+  rubytter = Rubytter.new(config.twitter.login, config.twitter.password, :header => {
+    'User-Agent' => "Filetter/#{VERSION} (http://wiki.github.com/jugyo/filetter)"
+  })
+
   add_hook :create do |files, event|
     files.each do |file|
       file_name = File.basename(file)
