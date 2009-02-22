@@ -9,7 +9,7 @@ self_file =
   else
     __FILE__
   end
-$:.unshift(File.dirname(self_file) + "/../lib")
+$:.unshift(File.dirname(File.expand_path(self_file)) + "/../lib")
 
 require 'filetter'
 Filetter.run
