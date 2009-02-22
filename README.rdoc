@@ -58,5 +58,9 @@ Default file to load is '.filetter' in the current directory if exist.
 
 == INSTALL:
 
+ sudo gem install filetter
+
+or
+
  gem source -a http://gems.github.com
  sudo gem install jugyo-filetter
