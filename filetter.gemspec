@@ -1,6 +1,6 @@
 Gem::Specification.new do |s|
   s.name = 'filetter'
-  s.version = '0.2.6'
+  s.version = '0.2.7'
   s.summary = "Filetter is a pluggable tool for file system."
   s.description = "Filetter is a pluggable tool for file system."
   s.files = %w( lib/filetter/file_info.rb lib/filetter/observer.rb lib/filetter/version.rb lib/filetter.rb lib/modes/flickr.rb lib/modes/mozrepl.rb lib/modes/sample.rb lib/modes/twitter.rb
@@ -10,7 +10,7 @@ Gem::Specification.new do |s|
                 Rakefile )
   s.executables = ["filetter"]
   s.add_dependency("configatron", ">= 2.2.2")
-  s.add_dependency("rubytter", ">= 0.4.5")
+  s.add_dependency("rubytter", ">= 0.4.6")
   s.add_dependency("rflickr", ">= 2006.02.01")
   s.add_dependency("highline", ">= 1.5.0")
   s.author = 'jugyo'
