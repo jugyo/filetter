@@ -20,6 +20,7 @@ module Filetter
       mode = nil
       load_file = '.filetter'
       work_dir = nil
+      help = nil
 
       OptionParser.new do |opt|
         opt.version = VERSION
@@ -31,6 +32,7 @@ module Filetter
         opt.on('-i', '--interval=interval', 'Interval of check files', Integer  ) {|v| interval = v   }
         opt.on('-d', '--debug', 'Enable debug mode'                             ) {|v| debug = true   }
         opt.parse!(ARGV)
+        help = opt.help
       end
 
       if work_dir
@@ -39,14 +41,12 @@ module Filetter
       end
 
       begin
-        unless mode || load_file
-          puts '=> Run as "sample" mode'
-          require 'modes/sample'
+        if mode.nil? && !File.exist?(load_file)
+          puts help
+          exit!
         else
-          if load_file && File.exist?(load_file)
-            puts "=> load \"#{load_file}\""
-            load load_file
-          end
+          puts "=> load \"#{load_file}\""
+          load load_file
           if mode
             puts "=> Run as \"#{mode}\" mode"
             require "modes/#{mode}"
