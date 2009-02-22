@@ -25,7 +25,7 @@ Gem::Specification.new do |s|
                 Rakefile )
   s.executables = ["filetter"]
   s.add_dependency("configatron", ">= 2.2.2")
-  s.add_dependency("rubytter", ">= 0.4.5")
+  s.add_dependency("rubytter", ">= 0.4.6")
   s.add_dependency("rflickr", ">= 2006.02.01")
   s.add_dependency("highline", ">= 1.5.0")
   s.author = 'jugyo'
