@@ -52,8 +52,10 @@ module Filetter
             exit!
           end
         else
-          puts "=> load \"#{load_file}\""
-          load load_file
+          if File.exist?(load_file)
+            puts "=> load \"#{load_file}\""
+            load load_file
+          end
           if mode
             puts "=> Run as \"#{mode}\" mode"
             require "modes/#{mode}"
