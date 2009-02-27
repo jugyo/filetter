@@ -17,10 +17,10 @@ module Filetter
       instance.run(options)
     end
 
-    attr_accessor :pattern, :interval, :debug, :prompt
+    attr_accessor :patterns, :interval, :debug, :prompt
 
     def initialize
-      @pattern = './**/*'
+      @patterns = './**/*'
       @interval = 1
       @work = true
       @file_infos = {}
@@ -90,7 +90,7 @@ module Filetter
     private
 
     def collect_files
-      real_files = Pathname.glob(@pattern).map do |i|
+      real_files = Pathname.glob(@patterns).map do |i|
         if debug
           print "\e[1K\e[0G#{i.basename.to_s}"
           $stdout.flush

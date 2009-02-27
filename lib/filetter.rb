@@ -14,7 +14,7 @@ Thread.abort_on_exception = true
 module Filetter
   class << self
     def run(options = {})
-      pattern = './**/*'
+      patterns = []
       interval = 2
       debug = false
       mode = nil
@@ -29,7 +29,7 @@ module Filetter
         opt.on('-m', '--mode=mode', 'Run mode'                                  ) {|v| mode = v       }
         opt.on('-f', '--loadfile=file', 'File to load'                          ) {|v| load_file = v  }
         opt.on('-c', '--cd=directory', 'cd to directory'                        ) {|v| work_dir = v   }
-        opt.on('-p', '--pattern=pattern', 'Pattern of target files'             ) {|v| pattern = v    }
+        opt.on('-p', '--pattern=pattern', 'Pattern of target files'             ) {|v| patterns << v  }
         opt.on('-i', '--interval=interval', 'Interval of check files', Integer  ) {|v| interval = v   }
         opt.on('-d', '--debug', 'Enable debug mode'                             ) {|v| debug = true   }
         opt.on('-l', '--list', 'List up available modes'                        ) {|v| list = true    }
@@ -41,6 +41,8 @@ module Filetter
         Dir.chdir(work_dir)
         puts "=> cd to #{work_dir}"
       end
+
+      patterns << './**/*' if patterns.empty?
 
       begin
         if mode.nil? && !File.exist?(load_file)
@@ -71,7 +73,7 @@ module Filetter
         exit!
       end
 
-      Observer.run({:pattern => pattern, :interval => interval, :debug => debug}.merge(options))
+      Observer.run({:patterns => patterns, :interval => interval, :debug => debug}.merge(options))
     end
 
     def add_hook(*args, &block)
