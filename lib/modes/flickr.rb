@@ -39,6 +39,7 @@ module Filetter
 
   config.flickr.set_default(:title, nil)
   config.flickr.set_default(:description, nil)
+  config.flickr.set_default(:tags, nil)
   config.flickr.set_default(:public, false)
   config.flickr.set_default(:friend, false)
   config.flickr.set_default(:family, false)
@@ -46,17 +47,20 @@ module Filetter
   add_hook :create do |files, event|
     files.each do |file|
       if File.file?(file) && Pathname.new(file).dirname == Pathname.pwd
-        puts "=> Upload '#{file}' to flickr."
-        flickr.photos.upload.upload_file(
-          file,
-          config.flickr.title,
-          config.flickr.description,
-          config.flickr.public,
-          config.flickr.friend,
-          config.flickr.family
-        )
-        rename_to = 'done/' + File.basename(file)
-        File.rename(file, rename_to)
+        Thread.start do
+          puts "=> Upload '#{file}' to flickr."
+          flickr.photos.upload.upload_file(
+            file,
+            config.flickr.title,
+            config.flickr.description,
+            config.flickr.tags,
+            config.flickr.public,
+            config.flickr.friend,
+            config.flickr.family
+          )
+          rename_to = 'done/' + File.basename(file)
+          File.rename(file, rename_to)
+        end
       end
     end
   end
